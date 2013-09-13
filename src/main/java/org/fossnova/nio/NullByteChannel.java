@@ -66,7 +66,9 @@ public final class NullByteChannel implements ByteChannel {
      */
     @Override
     public int write( final ByteBuffer buffer ) throws IOException {
-        return buffer.limit();
+        final int retVal = buffer.limit() - buffer.position();
+        buffer.position( buffer.limit() );
+        return retVal;
     }
 
     /**
